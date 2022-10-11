@@ -1,7 +1,6 @@
 package br.com.maiconcardoso.unittest.services;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
@@ -32,8 +31,22 @@ public class UserService {
         return repository.findById(id).orElseThrow(() -> new EntityNotFoundException(EntityNotFoundException.MESSAGE));
     }
 
-    public Optional<UserModel> findByUserName(String name) {
-        return repository.findByUserName(name);
+    public UserModel findByUserName(String name) {
+        return repository.findByUserName(name)
+                .orElseThrow(() -> new EntityNotFoundException(EntityNotFoundException.MESSAGE));
+    }
+
+    public UserModel updateUserModel(Integer id, UserDto userDto) {
+        UserModel userById = findByIdUserModel(id);
+        var userModel = new UserModel();
+        BeanUtils.copyProperties(userDto, userModel);
+        userModel.setId(userById.getId());
+        return repository.save(userModel);
+    }
+
+    public void deleteUserModel(Integer id) {
+        UserModel userToBeDeleted = findByIdUserModel(id);
+        repository.delete(userToBeDeleted);
     }
 
 }
