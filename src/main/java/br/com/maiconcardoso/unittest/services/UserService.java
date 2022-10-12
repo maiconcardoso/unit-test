@@ -31,7 +31,7 @@ public class UserService {
         return repository.findById(id).orElseThrow(() -> new EntityNotFoundException(EntityNotFoundException.MESSAGE));
     }
 
-    public UserModel findByNameUser(String name) {
+    public List<UserModel> findByNameUser(String name) {
         return repository.findByNameUser(name)
                 .orElseThrow(() -> new EntityNotFoundException(EntityNotFoundException.MESSAGE));
     }
