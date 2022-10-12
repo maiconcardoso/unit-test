@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -34,5 +36,6 @@ public class UserModel implements Serializable{
     private String email;
 
     @NotEmpty(message = "Password cannot be empty")
+    @JsonIgnore
     private String password;
 }
