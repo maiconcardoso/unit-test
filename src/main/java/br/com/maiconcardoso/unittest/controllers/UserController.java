@@ -38,11 +38,6 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).body(userService.findByIdUserModel(id));
     }
 
-    @GetMapping
-    public ResponseEntity<List<UserModel>> findByNameUserModel(@RequestParam(required = false) String name ) {
-        return ResponseEntity.status(HttpStatus.OK).body(userService.findByNameUser(name));
-    }
-
     @PostMapping
     public ResponseEntity<Void> saveUserModel(@RequestBody @Valid UserDto userDto) {
         userService.saveUser(userDto);
