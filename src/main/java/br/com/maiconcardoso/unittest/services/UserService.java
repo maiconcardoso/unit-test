@@ -31,11 +31,6 @@ public class UserService {
         return repository.findById(id).orElseThrow(() -> new EntityNotFoundException(EntityNotFoundException.MESSAGE));
     }
 
-    public List<UserModel> findByNameUser(String name) {
-        return repository.findByNameUser(name)
-                .orElseThrow(() -> new EntityNotFoundException(EntityNotFoundException.MESSAGE));
-    }
-
     public UserModel updateUserModel(Integer id, UserDto userDto) {
         UserModel userById = findByIdUserModel(id);
         var userModel = new UserModel();
