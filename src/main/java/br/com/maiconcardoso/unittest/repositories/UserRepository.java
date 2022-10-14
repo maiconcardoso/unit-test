@@ -12,7 +12,7 @@ import br.com.maiconcardoso.unittest.model.UserModel;
 @Repository
 public interface UserRepository extends JpaRepository<UserModel, Integer>{
 
-    @Query(" SELECT obj FROM UserModel obj WHERE obj.name LIKE :name ")
-    Optional<List<UserModel>> findByNameUser(String name);
+    // @Query(" SELECT obj FROM UserModel obj WHERE obj.name LIKE :name ")
+    // Optional<List<UserModel>> findByNameUser(String name);
     
 }
