@@ -29,5 +29,19 @@ public class UserRepositoryTest {
         Assertions.assertThat(userSaved.getId()).isNotNull();
         Assertions.assertThat(userSaved.getName()).isEqualTo(userToBeSaved.getName());
     }
+
+    @Test
+    @DisplayName("Update the user when successful")
+    public void update_PersistsUser_WhenSuccessful() {
+        UserModel userToBeSaved = UserCreator.createUserToBeSaved();
+        UserModel userSaved = userRepository.save(userToBeSaved);
+        userSaved.setName("Jose");
+        userSaved.setEmail("jose@gmail.com");
+        userSaved.setPassword("1234");
+        UserModel userToBeUpdated = userRepository.save(userSaved);
+        Assertions.assertThat(userToBeUpdated.getName()).isNotEqualTo(userToBeSaved.getName());
+        Assertions.assertThat(userToBeUpdated).isNotNull();
+        Assertions.assertThat(userToBeUpdated.getId()).isEqualTo(userToBeSaved.getId());
+    }
     
 }
