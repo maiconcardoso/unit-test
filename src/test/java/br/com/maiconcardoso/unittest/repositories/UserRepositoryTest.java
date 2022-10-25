@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import br.com.maiconcardoso.unittest.model.UserModel;
-import br.com.maiconcardoso.unittest.repositories.utils.UserCreator;
+import br.com.maiconcardoso.unittest.utils.UserCreator;
 
 @DataJpaTest
 @DisplayName("Tests for user repository")
