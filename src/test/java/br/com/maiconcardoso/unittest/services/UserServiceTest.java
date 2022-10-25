@@ -1,4 +1,4 @@
-package br.com.maiconcardoso.services;
+package br.com.maiconcardoso.unittest.services;
 
 import java.util.List;
 import java.util.Optional;
@@ -82,7 +82,7 @@ public class UserServiceTest {
 
         Assertions.assertThatExceptionOfType(EntityNotFoundException.class)
             .isThrownBy(() -> userService.findByIdUserModel(1));
-
-        
     }
+
+    
 }
