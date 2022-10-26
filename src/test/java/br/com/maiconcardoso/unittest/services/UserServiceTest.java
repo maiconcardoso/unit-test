@@ -17,7 +17,6 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import br.com.maiconcardoso.unittest.exceptions.EntityNotFoundException;
 import br.com.maiconcardoso.unittest.model.UserModel;
 import br.com.maiconcardoso.unittest.repositories.UserRepository;
-import br.com.maiconcardoso.unittest.services.UserService;
 import br.com.maiconcardoso.unittest.utils.UserCreator;
 
 @ExtendWith(SpringExtension.class) // Usado para testar a aplicação sem executa-la
@@ -84,5 +83,22 @@ public class UserServiceTest {
             .isThrownBy(() -> userService.findByIdUserModel(1));
     }
 
+    @Test
+    @DisplayName("Save return UserModel WhenSuccessful")
+    public void save_ReturnUserModel_WhenSuccessful() {
+        UserModel userModel = userService.saveUser(UserCreator.createUserDtoToBeSaved());
+
+        Assertions.assertThat(userModel).isNotNull().isEqualTo(UserCreator.createUserToBeSaved());
+    }
+
+    @Test
+    @DisplayName("Delete UserModel WhenSuccessful")
+    public void delete_UserModeol_WhenSuccessful() {
+        UserModel userModel = userService.saveUser(UserCreator.createUserDtoToBeSaved());
+        userService.deleteUserModel(userModel.getId());
+        
+        Assertions.assertThatCode(() -> this.userService.deleteUserModel(1))
+            .doesNotThrowAnyException();
+    }
     
 }
