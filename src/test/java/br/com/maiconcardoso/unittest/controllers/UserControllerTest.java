@@ -57,4 +57,16 @@ public class UserControllerTest {
             .hasSize(1);
     }
 
+    @Test
+    @DisplayName("FindById return user when successful")
+    public void findById_ReturnUser_WhenSuccessful() {
+        Integer expectedId = UserCreator.createUserToBeSaved().getId();
+
+        UserModel user = this.userController.findByIdUserModel(1).getBody();
+
+        Assertions.assertThat(user).isNotNull();
+
+        Assertions.assertThat(user.getId()).isEqualTo(expectedId);
+    }
+
 }
