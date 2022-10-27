@@ -11,6 +11,8 @@ import org.mockito.ArgumentMatchers;
 import org.mockito.BDDMockito;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import br.com.maiconcardoso.unittest.dtos.UserDto;
@@ -67,6 +69,34 @@ public class UserControllerTest {
         Assertions.assertThat(user).isNotNull();
 
         Assertions.assertThat(user.getId()).isEqualTo(expectedId);
+    }
+
+    @Test
+    @DisplayName("Save UserModel when successful")
+    public void save_UserModel_WhenSuccessful() {
+        UserModel userCreated = this.userController.saveUserModel(UserCreator.createUserDtoToBeSaved()).getBody();
+
+        Assertions.assertThat(userCreated).isNotNull().isEqualTo(UserCreator.createUserToBeSaved());
+    }
+
+    @Test
+    @DisplayName("Update UserModel when successful")
+    public void update_UserModel_WhenSuccessful() {
+        ResponseEntity<UserModel> userUpdated = this.userController.updateUserModel(1, UserCreator.createUserDtoToBeSaved());
+
+        Assertions.assertThat(userUpdated)
+            .isNotNull();
+
+        Assertions.assertThat(userUpdated.getStatusCode()).isEqualTo(HttpStatus.OK);
+    }
+
+    @Test
+    @DisplayName("Delete UserModel when successful")
+    public void delete_UserModel_WhenSuccessful() {
+        ResponseEntity<Void> userDeleted = this.userController.deleteUserModel(1);
+
+        Assertions.assertThat(userDeleted).isNotNull();
+        Assertions.assertThat(userDeleted.getStatusCode()).isEqualTo(HttpStatus.NO_CONTENT);
     }
 
 }
