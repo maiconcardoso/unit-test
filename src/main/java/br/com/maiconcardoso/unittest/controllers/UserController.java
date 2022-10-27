@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.maiconcardoso.unittest.dtos.UserDto;
@@ -39,9 +38,8 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> saveUserModel(@RequestBody @Valid UserDto userDto) {
-        userService.saveUser(userDto);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+    public ResponseEntity<UserModel> saveUserModel(@RequestBody @Valid UserDto userDto) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(userService.saveUser(userDto));
     }
 
     @PutMapping("/{id}")
